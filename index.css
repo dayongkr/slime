@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: #2c3e50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-wrapper {
+  /* background-image: url("image.jpg"); */
+  background-repeat: no-repeat;
+  position: relative;
+  align-content: flex-start;
+}
+
+canvas {
+  display: none;
+}
+
+img {
+  display: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: transparent !important;
+}
+
+.dot {
+  border-radius: 50%;
+  background-color: white;
+}
