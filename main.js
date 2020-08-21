@@ -33,15 +33,7 @@ const makeDot = (count, width, wrapper, mobile) => {
       dot.style.width = `${width / 2}px`;
       dot.style.height = `${width / 2}px`;
       dot.dataset.width = `${width}`;
-      if (mobile) {
-        // dot.addEventListener(
-        //   "touchmove",
-        //   () => {
-        //     makeDot(4, width / 2, dot);
-        //   },
-        //   { once: true }
-        // );
-      } else {
+      if (!mobile) {
         dot.addEventListener(
           "mouseenter",
           () => {
@@ -68,9 +60,12 @@ const setUpWrapper = (wrapper, mainImage) => {
   wrapper.style.width = `${mainImage.width}px`;
   wrapper.style.height = `${mainImage.height}px`;
   window.addEventListener("touchmove", (e) => {
-    console.log("hello");
-    if (e.touches[0].target.classList.contains("dot")) {
-      makeDot(4, e.touches[0].target.dataset.width / 2, e.touches[0].target);
+    const dot = document.elementFromPoint(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+    if (dot.classList.contains("dot")) {
+      makeDot(4, dot.dataset.width / 2, dot);
     }
   });
   makeDot(6, mainImage.width, wrapper, mobile);
