@@ -60,6 +60,8 @@ const setUpWrapper = (wrapper, mainImage) => {
   wrapper.style.width = `${mainImage.width}px`;
   wrapper.style.height = `${mainImage.height}px`;
   window.addEventListener("touchmove", (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     const dot = document.elementFromPoint(
       e.touches[0].clientX,
       e.touches[0].clientY
