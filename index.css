@@ -12,10 +12,7 @@ body {
 }
 
 #main-wrapper {
-  /* background-image: url("image.jpg"); */
-  background-repeat: no-repeat;
   position: relative;
-  align-content: flex-start;
 }
 
 canvas {

@@ -1,4 +1,5 @@
 const mainWrapper = document.getElementById("main-wrapper");
+const body = document.getElementsByTagName("body")[0];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const image = document.getElementById("source");
@@ -53,12 +54,12 @@ const makeDot = (count, width, wrapper, mobile) => {
   }
 };
 
-const setUpWrapper = (wrapper, mainImage) => {
+const setUpWrapper = (wrapper, width, height) => {
   const mobile = checkMobile(
     navigator.userAgent || navigator.vendor || window.opera
   );
-  wrapper.style.width = `${mainImage.width}px`;
-  wrapper.style.height = `${mainImage.height}px`;
+  wrapper.style.width = `${width}px`;
+  wrapper.style.height = `${height}px`;
   window.addEventListener("touchmove", (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -70,12 +71,24 @@ const setUpWrapper = (wrapper, mainImage) => {
       makeDot(4, dot.dataset.width / 2, dot);
     }
   });
-  makeDot(6, mainImage.width, wrapper, mobile);
+  makeDot(6, width, wrapper, mobile);
 };
 
 img.addEventListener("load", () => {
-  canvas.width = img.width;
-  canvas.height = img.height;
-  ctx.drawImage(img, 0, 0, img.width, img.height);
-  setUpWrapper(mainWrapper, img, canvas);
+  let width, height;
+  if (img.width > body.offsetWidth) {
+    const scale = img.width / body.offsetWidth;
+    width = img.width / scale;
+    height = img.height / scale;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+  } else {
+    width = img.width;
+    height = img.height;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+  }
+  setUpWrapper(mainWrapper, width, height);
 });
